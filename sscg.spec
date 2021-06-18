@@ -5,7 +5,7 @@
 # https://github.com/sgallagher/sscg
 %global provider_prefix         %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path             %{provider_prefix}
-%global release_prefix          101
+%global release_prefix          102
 
 
 Name:                           sscg
@@ -14,6 +14,8 @@ Release:                        %{release_prefix}%{?dist}
 Summary:                        Simple SSL certificate generator
 License:                        GPLv3+ with exceptions
 URL:                            https://%{provider_prefix}
+Vendor:                         Package Store <https://pkgstore.github.io>
+Packager:                       Kitsune Solar <kitsune.solar@gmail.com>
 
 Source0:                        https://%{provider_prefix}/releases/download/%{repo}-%{version}/%{repo}-%{version}.tar.xz
 
@@ -63,6 +65,9 @@ false signatures from the service certificate.
 
 
 %changelog
+* Fri Jun 18 2021 Package Store <kitsune.solar@gmail.com> - 2.6.2-102
+- UPD: Add "Vendor" & "Packager" fields.
+
 * Fri Jun 18 2021 Package Store <kitsune.solar@gmail.com> - 2.6.2-101
 - UPD: New build for latest changes.
 
