@@ -8,6 +8,7 @@ x509 Certificates are complicated to get right. SSCG makes it easy to generate u
 
 ```
 $ dnf copr enable pkgstore/sscg
+$ dnf install -y sscg
 ```
 
 ### Open Build Service (OBS)
