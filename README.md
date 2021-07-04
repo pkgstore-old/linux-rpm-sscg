@@ -23,6 +23,13 @@ $ dnf install -y sscg
 $ dnf upgrade -y sscg
 ```
 
+## Remove
+
+```
+$ dnf erase -y sscg
+$ dnf copr remove pkgstore/sscg
+```
+
 ## How to Build
 
 1. Get source from [src.fedoraproject.org](https://src.fedoraproject.org/rpms/sscg).
