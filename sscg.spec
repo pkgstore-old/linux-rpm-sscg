@@ -5,11 +5,12 @@
 # https://github.com/sgallagher/sscg
 %global provider_prefix         %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path             %{provider_prefix}
-%global release_prefix          102
+%global release_prefix          100
 
+%{!?meson_test: %global meson_test %{__meson} test -C %{_vpath_builddir} --num-processes %{_smp_build_ncpus} --print-errorlogs}
 
 Name:                           sscg
-Version:                        2.6.2
+Version:                        3.0.2
 Release:                        %{release_prefix}%{?dist}
 Summary:                        Simple SSL certificate generator
 License:                        GPLv3+ with exceptions
@@ -17,7 +18,7 @@ URL:                            https://%{provider_prefix}
 Vendor:                         Package Store <https://pkgstore.github.io>
 Packager:                       Kitsune Solar <kitsune.solar@gmail.com>
 
-Source0:                        https://%{provider_prefix}/releases/download/%{repo}-%{version}/%{repo}-%{version}.tar.xz
+Source0:                        https://%{provider_prefix}/archive/refs/tags/%{repo}-%{version}.tar.gz
 
 BuildRequires:                  gcc
 BuildRequires:                  libtalloc-devel
@@ -27,6 +28,22 @@ BuildRequires:                  libpath_utils-devel
 BuildRequires:                  meson
 BuildRequires:                  ninja-build
 BuildRequires:                  help2man
+
+# Protect against negative bitshift
+# Author: Stephen Gallagher <sgallagh@redhat.com>
+Patch1:                         0001-Protect-against-negative-bitshift.patch
+
+# Fix another negative bitshift issue
+# Author: Stephen Gallagher <sgallagh@redhat.com>
+Patch2:                         0002-Fix-another-negative-bitshift-issue.patch
+
+# Fix incorrect error-check
+# Author: Stephen Gallagher <sgallagh@redhat.com>
+Patch3:                         0003-Fix-incorrect-error-check.patch
+
+# Truncate IP address in SAN
+# Author: Stephen Gallagher <sgallagh@redhat.com>
+Patch4:                         0004-Truncate-IP-address-in-SAN.patch
 
 
 %description
@@ -42,7 +59,7 @@ false signatures from the service certificate.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-%{name}-%{version}
 
 
 %build
@@ -57,6 +74,7 @@ false signatures from the service certificate.
 %check
 %meson_test -t 10
 
+
 %files
 %license COPYING
 %doc README.md
@@ -65,6 +83,16 @@ false signatures from the service certificate.
 
 
 %changelog
+* Mon Mar 28 2022 Package Store <mail@z17.dev> - 3.0.2-100
+- NEW: SSCG v3.0.2.
+- UPD: Rebuild by Package Store.
+
+* Wed Jul 21 2021 Stephen Gallagher <sgallagh@redhat.com> - 3.0.0-1
+- Release 3.0.0
+- Support for OpenSSL 3.0
+- Support for outputting named Diffie-Hellman parameter groups
+- Support for CentOS Stream 9
+
 * Fri Jun 18 2021 Package Store <kitsune.solar@gmail.com> - 2.6.2-102
 - UPD: Add "Vendor" & "Packager" fields.
 
