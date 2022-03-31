@@ -5,7 +5,7 @@
 # https://github.com/sgallagher/sscg
 %global provider_prefix         %{provider}.%{provider_tld}/%{project}/%{repo}
 %global import_path             %{provider_prefix}
-%global release_prefix          100
+%global release_prefix          1000
 
 %{!?meson_test: %global meson_test %{__meson} test -C %{_vpath_builddir} --num-processes %{_smp_build_ncpus} --print-errorlogs}
 
@@ -15,19 +15,8 @@ Release:                        %{release_prefix}%{?dist}
 Summary:                        Simple SSL certificate generator
 License:                        GPLv3+ with exceptions
 URL:                            https://%{provider_prefix}
-Vendor:                         Package Store <https://pkgstore.github.io>
-Packager:                       Kitsune Solar <kitsune.solar@gmail.com>
 
-Source0:                        https://%{provider_prefix}/archive/refs/tags/%{repo}-%{version}.tar.gz
-
-BuildRequires:                  gcc
-BuildRequires:                  libtalloc-devel
-BuildRequires:                  openssl-devel
-BuildRequires:                  popt-devel
-BuildRequires:                  libpath_utils-devel
-BuildRequires:                  meson
-BuildRequires:                  ninja-build
-BuildRequires:                  help2man
+Source0:                        %{name}-%{name}-%{version}.tar.xz
 
 # Protect against negative bitshift
 # Author: Stephen Gallagher <sgallagh@redhat.com>
@@ -45,6 +34,14 @@ Patch3:                         0003-Fix-incorrect-error-check.patch
 # Author: Stephen Gallagher <sgallagh@redhat.com>
 Patch4:                         0004-Truncate-IP-address-in-SAN.patch
 
+BuildRequires:                  gcc
+BuildRequires:                  libtalloc-devel
+BuildRequires:                  openssl-devel
+BuildRequires:                  popt-devel
+BuildRequires:                  libpath_utils-devel
+BuildRequires:                  meson
+BuildRequires:                  ninja-build
+BuildRequires:                  help2man
 
 %description
 A utility to aid in the creation of more secure "self-signed"
@@ -83,7 +80,11 @@ false signatures from the service certificate.
 
 
 %changelog
-* Mon Mar 28 2022 Package Store <mail@z17.dev> - 3.0.2-100
+* Thu Mar 31 2022 Package Store <pkgstore@mail.ru> - 3.0.2-1000
+- UPD: Rebuild by Package Store.
+- UPD: File "sscg.spec".
+
+* Mon Mar 28 2022 Package Store <pkgstore@mail.ru> - 3.0.2-100
 - NEW: SSCG v3.0.2.
 - UPD: Rebuild by Package Store.
 
