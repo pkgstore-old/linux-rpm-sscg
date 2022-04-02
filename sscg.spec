@@ -21,15 +21,12 @@ Source0:                        %{name}-%{name}-%{version}.tar.xz
 # Protect against negative bitshift
 # Author: Stephen Gallagher <sgallagh@redhat.com>
 Patch1:                         0001-Protect-against-negative-bitshift.patch
-
 # Fix another negative bitshift issue
 # Author: Stephen Gallagher <sgallagh@redhat.com>
 Patch2:                         0002-Fix-another-negative-bitshift-issue.patch
-
 # Fix incorrect error-check
 # Author: Stephen Gallagher <sgallagh@redhat.com>
 Patch3:                         0003-Fix-incorrect-error-check.patch
-
 # Truncate IP address in SAN
 # Author: Stephen Gallagher <sgallagh@redhat.com>
 Patch4:                         0004-Truncate-IP-address-in-SAN.patch
